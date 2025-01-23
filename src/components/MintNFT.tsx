@@ -23,6 +23,7 @@ import {
 } from '@metaplex-foundation/mpl-candy-machine';
 import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox';
 import { SendTransactionError } from '@solana/web3.js';
+import toast from 'react-hot-toast';
 
 interface MintNFTProps {
   candyMachineId: string;
@@ -146,10 +147,22 @@ export const MintNFT = ({ candyMachineId, tokenMint }: MintNFTProps) => {
         });
         // const txid = bs58.encode(signature);
         console.log("Mint Success", signature)
+        toast.success('NFT successfully minted!', {
+          duration: 5000,
+          position: 'bottom-center',
+          style: {
+            background: '#10B981',
+            color: 'white',
+          },
+        });
          // Update items redeemed
         setItemsRedeemed(prev => prev + 1);
     } catch (error: any) {
       console.log("Something happened")
+      toast.error('Failed to mint NFT. Please try again.', {
+        duration: 5000,
+        position: 'bottom-center',
+      });
     }
 
       
